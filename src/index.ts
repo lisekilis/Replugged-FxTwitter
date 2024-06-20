@@ -1,24 +1,28 @@
-import { Injector, Logger, webpack } from "replugged";
+import { Injector, Logger, common } from "replugged";
 
 const inject = new Injector();
-const logger = Logger.plugin("PluginTemplate");
-
-export async function start(): Promise<void> {
-  const typingMod = await webpack.waitForModule<{
-    startTyping: (channelId: string) => void;
-  }>(webpack.filters.byProps("startTyping"));
-  const getChannelMod = await webpack.waitForModule<{
-    getChannel: (id: string) => {
-      name: string;
-    };
-  }>(webpack.filters.byProps("getChannel"));
-
-  if (typingMod && getChannelMod) {
-    inject.instead(typingMod, "startTyping", ([channel]) => {
-      const channelObj = getChannelMod.getChannel(channel);
-      logger.log(`Typing prevented! Channel: #${channelObj?.name ?? "unknown"} (${channel}).`);
-    });
+const logger = Logger.plugin("Replugged-FxTwitter");
+function fixup(content: string): string {
+  const twitterIndex = content.indexOf("https://twitter.com");
+  if (twitterIndex) {
+    content = `${content.slice(0, twitterIndex)}https://fxtwitter.com${content.slice(twitterIndex, content.length)}`;
+    logger.log("fixed up twitter!");
+    return fixup(content);
   }
+  const xIndex = content.indexOf("https://x.com");
+  if (xIndex) {
+    content = `${content.slice(0, xIndex)}https://fixupx.com${content.slice(xIndex, content.length)}`;
+    logger.log("fixed up x!");
+    return fixup(content);
+  }
+  return content;
+}
+// eslint-disable-next-line @typescript-eslint/require-await
+export async function start(): Promise<void> {
+  inject.before(common.messages, "editMessage", (args) => {
+    args[2].content = fixup(args[2].content);
+    return args;
+  });
 }
 
 export function stop(): void {
