@@ -1,6 +1,6 @@
 {
   "name": "Replugged-FxTwitter",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "description": "A plugin that fixes twitter embeds",
   "engines": {
     "node": ">=20.0.0",
@@ -23,17 +23,17 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@types/node": "^20.11.0",
+    "@types/node": "^20.14.7",
     "@types/react": "^18.3.3",
-    "@typescript-eslint/eslint-plugin": "^6.18.1",
-    "@typescript-eslint/parser": "^6.18.1",
-    "eslint": "^8.56.0",
+    "@typescript-eslint/eslint-plugin": "^6.21.0",
+    "@typescript-eslint/parser": "^6.21.0",
+    "eslint": "^8.57.0",
     "eslint-config-dmitmel": "github:dmitmel/eslint-config-dmitmel",
     "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-react": "^7.33.2",
-    "prettier": "^3.2.2",
+    "eslint-plugin-react": "^7.34.3",
+    "prettier": "^3.3.2",
     "react": "^18.3.1",
-    "replugged": "^4.7.13",
-    "typescript": "^5.3.3"
+    "replugged": "^4.8.0",
+    "typescript": "^5.5.2"
   }
 }
