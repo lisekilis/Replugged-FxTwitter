@@ -5,13 +5,13 @@ const inject = new Injector();
 const logger = Logger.plugin("Replugged-FxTwitter");
 function fixup(content: string): string {
   const twitterIndex = content.indexOf("https://twitter.com");
-  if (twitterIndex !== 0) {
+  if (twitterIndex !== -1) {
     content = `${content.slice(0, twitterIndex)}https://fxtwitter.com${content.slice(twitterIndex, content.length)}`;
     logger.log("fixed up twitter!");
     return fixup(content);
   }
   const xIndex = content.indexOf("https://x.com");
-  if (xIndex !== 0) {
+  if (xIndex !== -1) {
     content = `${content.slice(0, xIndex)}https://fixupx.com${content.slice(xIndex, content.length)}`;
     logger.log("fixed up x!");
     return fixup(content);
