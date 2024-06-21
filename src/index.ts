@@ -12,8 +12,8 @@ function fixup(content: string): string {
       return content.slice(0, twitter.index - 2) + content.slice(twitter.index, content.length);
     }
     const twitterIndex = twitter.index + twitter[1].length + (twitter[2] ? twitter[2].length : 0);
-    content = `${content.slice(0, twitterIndex)}fx${content.slice(twitterIndex)}`;
     logger.log("fixed up twitter!");
+    content = `${content.slice(0, twitterIndex)}fx${content.slice(twitterIndex)}`;
     return fixup(content);
   }
   const xRegex =
@@ -21,7 +21,7 @@ function fixup(content: string): string {
   const x = xRegex.exec(content);
   if (x) {
     if (content[x.index - 1] == "\\") {
-      return content.slice(0, x.index - 2) + content.slice(x.index, content.length);
+      return content.slice(0, x.index - 1) + content.slice(x.index, content.length);
     }
     const xIndex = x.index + x[1].length + (x[2] ? x[2].length : 0);
     content = `${content.slice(0, xIndex)}fixup${content.slice(xIndex)}`;
