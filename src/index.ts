@@ -14,7 +14,7 @@ function fixup(content: string): string {
     const twitterIndex = twitter.index + twitter[1].length + (twitter[2] ? twitter[2].length : 0);
     logger.log("fixed up twitter!");
     content = `${content.slice(0, twitterIndex)}fx${content.slice(twitterIndex)}`;
-    return fixup(content);
+    return `${content.slice(0, twitterIndex + twitter[0].length)}${fixup(content.slice(twitterIndex + twitter[0].length, content.length))}`;
   }
   const xRegex =
     /(https:\/\/)(www\.)?(?:x\.com\/|x\.com\/@)([a-zA-Z0-9_]+)\/status\/([0-9]{19})\??/i;
@@ -26,7 +26,7 @@ function fixup(content: string): string {
     const xIndex = x.index + x[1].length + (x[2] ? x[2].length : 0);
     content = `${content.slice(0, xIndex)}fixup${content.slice(xIndex)}`;
     logger.log("fixed up x!");
-    return fixup(content);
+    return `${content.slice(0, xIndex + x[0].length)}${fixup(content.slice(xIndex + x[0].length, content.length))}`;
   }
   return content;
 }
