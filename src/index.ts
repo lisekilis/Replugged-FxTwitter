@@ -1,4 +1,5 @@
 import { Injector, Logger, common } from "replugged";
+import { cfg } from "./config";
 
 const inject = new Injector();
 const logger = Logger.plugin("Replugged-FxTwitter");
@@ -19,8 +20,12 @@ function fixup(content: string): string {
 }
 // eslint-disable-next-line @typescript-eslint/require-await
 export async function start(): Promise<void> {
+  inject.before(common.messages, "sendMessage", (args) => {
+    if (cfg.get("send", true)) args[1].content = fixup(args[1].content);
+    return args;
+  });
   inject.before(common.messages, "editMessage", (args) => {
-    args[2].content = fixup(args[2].content);
+    if (cfg.get("edit", true)) args[2].content = fixup(args[2].content);
     return args;
   });
 }
