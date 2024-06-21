@@ -1,11 +1,5 @@
-# Replugged plugin template
+## Tired of clunky Twitter embeds in your chats?  This plugin seamlessly replaces standard Twitter links with embeddable fxtwitter.com links within your messages. No more broken previews or missing content!
 
-See the [plugin development guide](https://guide.replugged.dev/docs/plugins/getting-started) for
-more information on using this template.
-
-# License
-
-The [plugin template](https://github.com/replugged-org/plugin-template) is licensed under the
-[MIT](https://opensource.org/license/mit/) license. However, addons using this template are not
-necessarily licensed under MIT. Developers are encouraged to add a license file to their repository,
-but if none exists, the repository should be considered as unlicensed.
+### It even works with shortened x.com links! :DiesOfCringe: 
+## What it do tho?
+### - Replaces Twitter links with fxtwitter.com embeds for richer content display.
