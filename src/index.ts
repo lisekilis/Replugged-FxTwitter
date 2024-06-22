@@ -1,6 +1,8 @@
 import { Injector, Logger, common } from "replugged";
 import { cfg } from "./config";
 
+export * from "./settings";
+
 const inject = new Injector();
 const logger = Logger.plugin("Replugged-FxTwitter");
 function fixup(content: string): string {
