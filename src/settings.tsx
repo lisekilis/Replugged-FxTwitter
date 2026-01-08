@@ -1,27 +1,55 @@
 import { components, settings, util } from "replugged";
+import { Select } from "replugged/dist/renderer/modules/components";
+import { EmbedServices } from "./types";
 
-const { Clickable, SwitchItem, Text } = components;
+const { Clickable, Switch, Text } = components;
 
-const cfg = await settings.init("dev.lisekilis.RepluggedFxTwitter");
+const cfg = settings.init("dev.lisekilis.RepluggedFxTwitter");
 
 export function Settings(): React.ReactElement {
   return (
     <>
       <Text.H1>Replace</Text.H1>
-      <SwitchItem
+      <Switch
         {...{
+          label: "On send",
           note: "Replaces the twitter link on send.",
           ...util.useSetting(cfg, "send", true),
-        }}>
-        On send
-      </SwitchItem>
-      <SwitchItem
+        }}></Switch>
+      <Switch
         {...{
+          label: "On edit",
           note: "Replaces the twitter link on edit.",
           ...util.useSetting(cfg, "edit", true),
-        }}>
-        On edit
-      </SwitchItem>
+        }}></Switch>
+      <Select
+        {...{
+          label: " Embed Service",
+          ...util.useSetting(cfg, "service", EmbedServices.FxTwitter),
+        }}
+        options={[
+          {
+            label: "FxTwitter",
+            value: EmbedServices.FxTwitter,
+          },
+          {
+            label: "FixupX",
+            value: EmbedServices.FixupX,
+          },
+          {
+            label: "VXTwitter",
+            value: EmbedServices.VXTwitter,
+          },
+          {
+            label: "GirlCockX",
+            value: EmbedServices.GirlCockX,
+          },
+          {
+            label: "StupidPenisx",
+            value: EmbedServices.StupidPenisx,
+          },
+        ]}
+      />
       <Clickable
         onClick={() =>
           window.open("https://discord.com/vanityurl/dotcom/steakpants/flour/flower/index11.html")
