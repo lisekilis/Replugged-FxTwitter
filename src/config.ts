@@ -1,19 +1,24 @@
 import { settings } from "replugged";
-import { EmbedServices } from "./types";
 
-interface Settings {
-  send?: boolean;
-  edit?: boolean;
-  service?: EmbedServices;
+export enum EmbedServices {
+  FxTwitter = "fxtwitter",
+  GirlCockX = "girlcockx",
+  FixupX = "fixupx",
+  VXTwitter = "vxtwitter",
+  StupidPenisx = "stupidpenisx",
+  XCunny = "xcunny",
 }
 
 const defaultSettings = {
   send: true,
   edit: true,
+  https: true,
   service: EmbedServices.FxTwitter,
-} satisfies Partial<Settings>;
+};
 
-export const cfg = settings.init<Settings, keyof typeof defaultSettings>(
+type Settings = Partial<typeof defaultSettings>;
+
+export const cfg = settings.init<Settings, keyof Settings>(
   "dev.lisekilis.RepluggedFxTwitter",
   defaultSettings,
 );
