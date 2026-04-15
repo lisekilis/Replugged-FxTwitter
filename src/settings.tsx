@@ -1,54 +1,63 @@
-import { components, settings, util } from "replugged";
-import { Select } from "replugged/dist/renderer/modules/components";
-import { EmbedServices } from "./types";
-
-const { Clickable, Switch, Text } = components;
-
-const cfg = settings.init("dev.lisekilis.RepluggedFxTwitter");
+import { util } from "replugged";
+import { Clickable, Select, Stack, Switch, Text } from "replugged/components";
+import { EmbedServices, cfg } from "./config";
 
 export function Settings(): React.ReactElement {
   return (
-    <>
+    <Stack gap={24}>
       <Text.H1>Replace</Text.H1>
       <Switch
         {...{
           label: "On send",
-          note: "Replaces the twitter link on send.",
+          description: "Replaces the twitter link on send.",
           ...util.useSetting(cfg, "send", true),
-        }}></Switch>
+        }}
+      />
       <Switch
         {...{
           label: "On edit",
-          note: "Replaces the twitter link on edit.",
+          description: "Replaces the twitter link on edit.",
           ...util.useSetting(cfg, "edit", true),
-        }}></Switch>
+        }}
+      />
+      <Switch
+        {...{
+          label: "Https",
+          description: "Automatically replace http with https.",
+          ...util.useSetting(cfg, "https", true),
+        }}
+      />
       <Select
         {...{
-          label: " Embed Service",
+          label: "Embed Service",
+          options: [
+            {
+              label: "FxTwitter",
+              value: EmbedServices.FxTwitter,
+            },
+            {
+              label: "FixupX",
+              value: EmbedServices.FixupX,
+            },
+            {
+              label: "VXTwitter",
+              value: EmbedServices.VXTwitter,
+            },
+            {
+              label: "GirlCockX",
+              value: EmbedServices.GirlCockX,
+            },
+            {
+              label: "StupidPenisx",
+              value: EmbedServices.StupidPenisx,
+            },
+            {
+              label: "XCunny",
+              value: EmbedServices.XCunny,
+            },
+          ],
           ...util.useSetting(cfg, "service", EmbedServices.FxTwitter),
         }}
-        options={[
-          {
-            label: "FxTwitter",
-            value: EmbedServices.FxTwitter,
-          },
-          {
-            label: "FixupX",
-            value: EmbedServices.FixupX,
-          },
-          {
-            label: "VXTwitter",
-            value: EmbedServices.VXTwitter,
-          },
-          {
-            label: "GirlCockX",
-            value: EmbedServices.GirlCockX,
-          },
-          {
-            label: "StupidPenisx",
-            value: EmbedServices.StupidPenisx,
-          },
-        ]}
       />
       <Clickable
         onClick={() =>
@@ -56,6 +65,6 @@ export function Settings(): React.ReactElement {
         }>
         {<Text.H2>♪(^∇^*)</Text.H2>}
       </Clickable>
-    </>
+    </Stack>
   );
 }
