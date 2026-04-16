@@ -6,17 +6,17 @@ export * from "./settings";
 const inject = new Injector();
 const logger = Logger.plugin("Replugged-FxTwitter");
 
-const muskyRegex =
+const exTwitterRegex =
   /(\\?)(http(s)?:\/\/)(www\.)?(x|twitter)(\.com\/@?[a-zA-Z0-9_]+\/status\/[0-9]{19})\??/gi;
 
 function fixup(content: string): string {
-  const musky = /(twitter|x).com/.exec(content);
+  const exTwitter = /(twitter|x).com/.exec(content);
   const https = cfg.get("https");
   const service = cfg.get("service");
-  if (!musky) return content;
-  logger.verbose("fixed up musky!");
+  if (!exTwitter) return content;
+  logger.verbose("fixed up exTwitter!");
   return content.replaceAll(
-    muskyRegex,
+    exTwitterRegex,
     (_string, escape, link, protocol, _secure, _www, _service, suffix) =>
       escape ? link : `${https ? "https://" : protocol}${service}${suffix}`,
   );
