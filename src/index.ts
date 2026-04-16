@@ -7,7 +7,7 @@ const inject = new Injector();
 const logger = Logger.plugin("Replugged-FxTwitter");
 
 const muskyRegex =
-  /(http(s)?:\/\/)(www\.)?(x|twitter)(\.com\/@?[a-zA-Z0-9_]+\/status\/[0-9]{19})\??/i;
+  /(\\?)(http(s)?:\/\/)(www\.)?(x|twitter)(\.com\/@?[a-zA-Z0-9_]+\/status\/[0-9]{19})\??/gi;
 
 function fixup(content: string): string {
   const musky = /(twitter|x).com/.exec(content);
@@ -15,10 +15,10 @@ function fixup(content: string): string {
   const service = cfg.get("service");
   if (!musky) return content;
   logger.verbose("fixed up musky!");
-  return content.replace(
+  return content.replaceAll(
     muskyRegex,
-    (_string, protocol, _secure, _www, _service, suffix) =>
-      `${https ? "https://" : protocol}${service}${suffix}`,
+    (_string, escape, link, protocol, _secure, _www, _service, suffix) =>
+      escape ? link : `${https ? "https://" : protocol}${service}${suffix}`,
   );
 }
 
