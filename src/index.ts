@@ -7,7 +7,7 @@ const inject = new Injector();
 const logger = Logger.plugin("Replugged-FxTwitter");
 
 const exTwitterRegex =
-  /(\\?)(http(s)?:\/\/)(www\.)?(x|twitter)(\.com\/@?[a-zA-Z0-9_]+\/status\/[0-9]{19})\??/gi;
+  /(\\?)(http(s)?:\/\/)(www\.)?(x|twitter)(\.com\/@?[a-zA-Z0-9_]+\/status\/[0-9]{19}\??)/gi;
 
 function fixup(content: string): string {
   const exTwitter = /(twitter|x).com/.exec(content);
